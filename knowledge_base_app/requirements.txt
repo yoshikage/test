@@ -1,0 +1,9 @@
+faiss-cpu
+flask
+werkzeug
+pypdf2
+python-docx
+sentence-transformers
+numpy
+transformers
+torch

@@ -1,0 +1,44 @@
+<!doctype html>
+<title>Upload new File - Knowledge Base App</title>
+<style>
+    body { font-family: sans-serif; margin: 20px; }
+    .container { max-width: 800px; margin: auto; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input[type="file"] { margin-bottom: 10px; }
+    input[type="submit"] { padding: 10px 15px; background-color: #007bff; color: white; border: none; cursor: pointer; }
+    .message { padding: 10px; margin-bottom:15px; border-radius: 3px; }
+    .message.success { background-color: #d4edda; border-left: 6px solid #28a745; }
+    .message.error { background-color: #f8d7da; border-left: 6px solid #dc3545; }
+    .message.info { background-color: #e7f3fe; border-left: 6px solid #2196F3; }
+    nav { margin-bottom: 20px; }
+    nav a { margin-right: 15px; text-decoration: none; color: #007bff; }
+</style>
+<body>
+    <div class="container">
+        <nav>
+            <a href="{{ url_for('upload_file_route') }}">Upload Documents</a>
+            <a href="{{ url_for('query_route') }}">Query Knowledge Base</a>
+        </nav>
+        <h1>Upload New File</h1>
+        
+        {% if message %}
+            {% if "success" in message.lower() or "processed" in message.lower() %}
+                <p class="message success">{{ message }}</p>
+            {% elif "error" in message.lower() or "no file" in message.lower() or "allowed file types" in message.lower() %}
+                <p class="message error">{{ message }}</p>
+            {% else %}
+                <p class="message info">{{ message }}</p>
+            {% endif %}
+        {% endif %}
+
+        <form method=post enctype=multipart/form-data>
+            <div class="form-group">
+                <label for="file">Choose file to upload (txt, pdf, docx, csv):</label>
+                <input type=file name=file id=file>
+            </div>
+            <input type=submit value=Upload>
+        </form>
+    </div>
+</body>
+</html>
